@@ -11,6 +11,7 @@ import PropertyDetails from './Application/Pages/PropertyDetails/PropertyDetails
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import UpdateProfile from './Application/Pages/Profile/UpdateProfile';
 import UserProfile from './Application/Pages/Profile/UserProfile';
+import ResetPassword from './Application/Pages/Authentication/ResetPassword';
 
 
 // Define the router
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path:'/profile',
         element:<UserProfile></UserProfile>
+      },
+      {
+        path:'reset',
+        element:<ResetPassword></ResetPassword>
       }
     ]
   },
