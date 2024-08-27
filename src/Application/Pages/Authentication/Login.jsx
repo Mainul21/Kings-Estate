@@ -1,11 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
-
+import { FaEye,FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const {user,logIn} = useContext(AuthContext)
   const navigate = useNavigate()
+  const [show, setShow] = useState(false)
 
   const location = useLocation()
   console.log(location)
@@ -27,6 +28,7 @@ const Login = () => {
     })
 
   }
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col">
@@ -52,17 +54,20 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={show? 'password':'text'}
                 placeholder="password"
                 name="password"
-                className="input input-bordered"
+                className="input input-bordered relative"
                 required
               />
+              <button className="absolute right-10 top-2/4 transform -translate-y-1/2" onClick={()=>{
+                setShow(!show)
+              }}>{show? <FaEye></FaEye>:<FaEyeSlash></FaEyeSlash>}</button>
               <label className="label flex flex-col">
-                <a  className="label-text-alt link link-hover text-start">
+                <Link to={'/reset'}  className="label-text-alt link link-hover text-start">
                   Forgot password?
-                </a>
-                <span className="font-bold text-xs mt-3 text-start">Don't Have An Account? <Link className="text-blue-500">Register</Link></span>
+                </Link>
+                <span className="font-bold text-xs mt-3 text-start">Don't Have An Account? <Link to={'/signup'} className="text-blue-500">Register</Link></span>
               </label>
             </div>
             <div className="form-control mt-4">
