@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
 
   const {signUp,setUserProfile} = useContext(AuthContext)
+  const [show, setShow] = useState(false)
 
   const handleSignUp = e =>{
     e.preventDefault()
@@ -80,12 +82,13 @@ const Signup = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={show?"password":'text'}
                 placeholder="password"
                 name="password"
-                className="input input-bordered"
+                className="input input-bordered relative"
                 required
               />
+              <button className="absolute right-10 top-2/3 transform" onClick={()=>{setShow(!show)}}>{show? <FaEye></FaEye>: <FaEyeSlash></FaEyeSlash>}</button>
               <label className="label">
                 <span className="font-bold"> Already Have An Account? <Link className="text-blue-700" to={'/login'}>Log In</Link></span>
               </label>
